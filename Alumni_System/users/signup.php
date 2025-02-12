@@ -2,7 +2,7 @@
     include ("../includes/header.php");
     include ("../backend/signup_handler.php");
 ?>
-<body class="bg-gray-100 flex items-center justify-center h-screen font-[poppins]" style="background-image: url('../assets/background.jpg'); background-size: cover; background-position: center;"></body>
+<body class="bg-gray-100 flex items-center justify-center h-screen font-[poppins]" style="background-image: url('../assets/bg.jpg'); background-size: cover; background-position: center;"></body>
     <!-- Sign Up Form container -->
     <div class="w-full md:w-2/3 lg:w-1/2 bg-white rounded-xl shadow-lg p-8">
         <p class="text-2xl font-bold mb-4">Register with your personal details</p>
@@ -30,7 +30,7 @@
             <div class="flex flex-wrap -mx-2 mb-4" id="alumniIdContainer">
                 <div class="w-full md:w-1/2 px-2">
                     <label for="alumni_id" class="mb-2 text-sm font-semibold">Alumni ID</label>
-                    <input type="number" id="alumni_id" name="alumni_id" class="block w-full p-2 border rounded">
+                    <input type="int" id="alumni_id" name="alumni_id" class="block w-full p-2 border rounded">
                 </div>
                 <div class="w-full md:w-1/2 px-2">
                     <label for="gender" class="mb-2 text-sm font-semibold">Gender</label>
@@ -74,17 +74,17 @@
                 </div>
                 <div class="w-full md:w-1/2 px-2">
                     <label for="contact_no" class="mb-2 text-sm font-semibold">Contact No.</label>
-                    <input type="number" id="contact_no" name="contact_no" required class="block w-full p-2 border rounded">
+                    <input type="int" id="contact_no" name="contact_no" required class="block w-full p-2 border rounded">
                 </div>
             </div>
             
             <label for="password" class="mb-2 text-sm font-semibold">Password</label>
             <input type="password" id="password" name="password" required class="block w-full mb-4 p-2 border rounded">
 
-            <input type="submit"name="register_btn" class="w-full bg-gradient-to-r from-green-400 to-green-700 text-xl text-white p-2 rounded-xl hover:bg-grey-200 transition font-semibold mb-2 cursor-pointer">
+            <input type="submit"name="register_btn" class="w-full bg-gradient-to-r from-indigo-600 to-indigo-900 text-xl text-white p-2 rounded-xl hover:bg-grey-200 transition font-semibold mb-2 cursor-pointer">
 
         </form>
-        <p class="text-center">Have an account? <a class="font-semibold text-green-700" href="login.php">Login</a></p>
+        <p class="text-center">Have an account? <a class="font-semibold text-indigo-900" href="login.php">Login</a></p>
     </div>
 
     <script src="../scripts/signup.js">

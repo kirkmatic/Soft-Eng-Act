@@ -9,7 +9,6 @@
 
         $lastname = validateInput($db->conn, $_POST['lastname']);
         $firstname = validateInput($db->conn, $_POST['firstname']);        
-
         $middlename = validateInput($db->conn, $_POST['middlename']);
         $gender = validateInput($db->conn, $_POST['gender']);
         $birthday = validateInput($db->conn, $_POST['birthday']);
@@ -18,8 +17,10 @@
         $contact_no = validateInput($db->conn, $_POST['contact_no']);
         $password = validateInput($db->conn, $_POST['password']);
 
+        // Set ucode based on uname
         if ($uname == 'Dean') {
             $ucode = '001';
+            $alumni_id = '001'; // Set alumni_id to 001 for Dean
         } elseif ($uname == 'ACT') {
             $ucode = '002';
         } elseif ($uname == 'IT') {

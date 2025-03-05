@@ -1,8 +1,8 @@
 <?php
     define("DB_HOST", "localhost");
-    define("DB_USER", "plmun_alumni_system");
+    define("DB_USER", "cs3a");
     define("DB_PASSWORD", "");
-    define("DB_DATABASE", "plmun_alumni_system");
+    define("DB_DATABASE", "cs3a");
 
     include_once('db_connection.php');
     $db = new db_connection();

@@ -1,51 +1,53 @@
 <?php
-    include('../config/app.php');
+include('../config/app.php');
 
-    if(isset($_POST['register_btn']) ) {
+if (isset($_POST['register_btn'])) {
+    // Get form inputs
+    $access = $_POST['access'];
+    $uname = $_POST['uname'];
+    $user_id = !empty($_POST['user_id']) ? $_POST['user_id'] : null;
+    $password = $_POST['password'];
+    $confirm_password = $_POST['confirm_password'];
 
-        $access = validateInput($db->conn, $_POST['access']);
-        $alumni_id = isset($_POST['alumni_id']) ? validateInput($db->conn, $_POST['alumni_id']) : null;
-        $uname = validateInput($db->conn, $_POST['uname']);
-
-        $lastname = validateInput($db->conn, $_POST['lastname']);
-        $firstname = validateInput($db->conn, $_POST['firstname']);        
-        $middlename = validateInput($db->conn, $_POST['middlename']);
-        $gender = validateInput($db->conn, $_POST['gender']);
-        $birthday = validateInput($db->conn, $_POST['birthday']);
-        $address = validateInput($db->conn, $_POST['address']);
-        $email = validateInput($db->conn, $_POST['email']);
-        $contact_no = validateInput($db->conn, $_POST['contact_no']);
-        $password = validateInput($db->conn, $_POST['password']);
-
-        // Set ucode based on uname
-        if ($uname == 'Dean') {
-            $ucode = '001';
-            $alumni_id = '001'; // Set alumni_id to 001 for Dean
-        } elseif ($uname == 'ACT') {
-            $ucode = '002';
-        } elseif ($uname == 'IT') {
-            $ucode = '003';
-        } elseif ($uname == 'CS') {
-            $ucode = '004';
-        } else {
-            $ucode = '000'; 
-        }
-
-        $query = "INSERT INTO users (access, alumni_id, uname, lastname, firstname, middlename, gender, birthday, address, email, contact_no, password, ucode) 
-                  VALUES ('$access', '$alumni_id', '$uname', '$lastname', '$firstname', '$middlename', '$gender', '$birthday', '$address', '$email', '$contact_no', '$password', '$ucode')";
-
-        $query_run = mysqli_query($db->conn, $query);
-
-        if($query_run) {
-            $_SESSION['message'] = "User Registered Successfully";
-            echo "<script>alert('Successfully registered!');</script>";
-            echo "New record created successfully";
-            header("Location: ../users/login.php");
-            exit(0);
-        } else {
-            $_SESSION['message'] = "User Registration Failed";
-            header("Location: ../users/signup.php");
-            exit(0);
-        }
+    // Check if passwords match
+    if ($password !== $confirm_password) {
+        $_SESSION['message'] = "Passwords do not match!";
+        header("Location: ../users/signup.php");
+        exit;
     }
+
+    // Hash password for security
+    $hashed_password = password_hash($password, PASSWORD_BCRYPT);
+
+    // If access is Registrar, set uname to 'Registrar' and ucode to '000'
+    if ($access === 'Registrar') {
+        $uname = 'Registrar';
+        $ucode = '000';
+    }
+
+    // Assign ucode based on uname
+    $ucode_list = ['Registrar' => '000', 'Dean' => '001', 'ACT' => '002', 'IT' => '003', 'CS' => '004'];
+    $ucode = $ucode_list[$uname] ?? '000';
+
+    // Ensure Registrar requires a user_id
+    if ($access === 'Registrar' && empty($user_id)) {
+        $_SESSION['message'] = "Registrar must have a User ID!";
+        header("Location: ../users/signup.php");
+        exit;
+    }
+
+    // Insert user into database
+    $stmt = $db->conn->prepare("INSERT INTO users_table (user_id, password, access, uname, ucode) VALUES (?, ?, ?, ?, ?)");
+    $stmt->bind_param("issss", $user_id, $hashed_password, $access, $uname, $ucode);
+
+    if ($stmt->execute()) {
+        $_SESSION['message'] = "User Registered Successfully!";
+        header("Location: ../users/login.php");
+        exit;
+    } else {
+        $_SESSION['message'] = "User Registration Failed!";
+        header("Location: ../users/signup.php");
+        exit;
+    }
+}
 ?>

@@ -2,5 +2,8 @@
     include ("../../../includes/header.php");
 ?>
 <body>
-    <h1>ACT Page</h1>
+    <?php
+        include ("../../../includes/nav.php");
+    ?>
+    <h1 class="text-3xl font-bold ">ACT Page</h1>
 </body>

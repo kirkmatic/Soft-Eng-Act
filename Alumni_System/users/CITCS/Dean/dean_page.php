@@ -4,7 +4,12 @@
     
 ?>
 <body>
+    <?php
+        include ("../../../includes/nav.php");
+    ?>
     <h1 class="text-lg text-center mx-9 font-bold p-4">Dean's Page</h1>
+    <h2 class="text-md text-left mx-3 font-medium p-2">List of Students</h2>
+
     <?php
         $query = "SELECT
             users.alumni_id,
@@ -30,7 +35,7 @@
         if (mysqli_num_rows($result) > 0) {
             echo "<div class='overflow-x-auto'>";
             echo "<table class='min-w-full divide-y divide-gray-200'>";
-            echo "<thead class='bg-indigo-900 '>
+            echo "<thead class='bg-green-900 '>
             <tr>
             <th class='px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider'>Alumni Id</th>
             <th class='px-6 py-3 text-left text-xs font-bold text-white uppercase tracking-wider'>Lastname</th>

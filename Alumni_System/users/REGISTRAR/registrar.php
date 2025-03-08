@@ -27,45 +27,54 @@ $result = mysqli_query($conn, $query);
 
     <!-- Filters and Add Student Button -->
     <div class="flex justify-between items-center mt-6 bg-white p-4">
-        <div class="flex space-x-3">
-            <select id="yearFilter" class="p-2 border-2 text-lg border-green-900 rounded">
-                <option value="">Select Year</option>
-                <?php
-                $yearQuery = "SELECT DISTINCT year_graduated FROM students_background_table ORDER BY year_graduated DESC";
-                $yearResult = mysqli_query($conn, $yearQuery);
-                while ($row = mysqli_fetch_assoc($yearResult)) {
-                    echo "<option value='{$row['year_graduated']}'>{$row['year_graduated']}</option>";
-                }
-                ?>
-            </select>
+    <!-- Filters -->
+    <div class="flex space-x-3">
+        <select id="yearFilter" class="p-2 border-2 text-lg border-green-900 rounded">
+            <option value="">Select Year</option>
+            <?php
+            $yearQuery = "SELECT DISTINCT year_graduated FROM students_background_table ORDER BY year_graduated DESC";
+            $yearResult = mysqli_query($conn, $yearQuery);
+            while ($row = mysqli_fetch_assoc($yearResult)) {
+                echo "<option value='{$row['year_graduated']}'>{$row['year_graduated']}</option>";
+            }
+            ?>
+        </select>
 
-            <select id="batchFilter" class="p-2 border-2 text-lg border-green-900 rounded">
-                <option value="">Select Batch</option>
-                <?php
-                $batchQuery = "SELECT DISTINCT batch_name FROM students_background_table ORDER BY batch_name ASC";
-                $batchResult = mysqli_query($conn, $batchQuery);
-                while ($row = mysqli_fetch_assoc($batchResult)) {
-                    echo "<option value='{$row['batch_name']}'>{$row['batch_name']}</option>";
-                }
-                ?>
-            </select>
+        <select id="batchFilter" class="p-2 border-2 text-lg border-green-900 rounded">
+            <option value="">Select Batch</option>
+            <?php
+            $batchQuery = "SELECT DISTINCT batch_name FROM students_background_table ORDER BY batch_name ASC";
+            $batchResult = mysqli_query($conn, $batchQuery);
+            while ($row = mysqli_fetch_assoc($batchResult)) {
+                echo "<option value='{$row['batch_name']}'>{$row['batch_name']}</option>";
+            }
+            ?>
+        </select>
 
-            <select id="programFilter" class="p-2 border-2 text-lg border-green-900 rounded">
-                <option value="">Select Program</option>
-                <?php
-                $programQuery = "SELECT DISTINCT program FROM students_background_table ORDER BY program ASC";
-                $programResult = mysqli_query($conn, $programQuery);
-                while ($row = mysqli_fetch_assoc($programResult)) {
-                    echo "<option value='{$row['program']}'>{$row['program']}</option>";
-                }
-                ?>
-            </select>
+        <select id="programFilter" class="p-2 border-2 text-lg border-green-900 rounded">
+            <option value="">Select Program</option>
+            <?php
+            $programQuery = "SELECT DISTINCT program FROM students_background_table ORDER BY program ASC";
+            $programResult = mysqli_query($conn, $programQuery);
+            while ($row = mysqli_fetch_assoc($programResult)) {
+                echo "<option value='{$row['program']}'>{$row['program']}</option>";
+            }
+            ?>
+        </select>
         </div>
 
-        <button id="openModal" class="bg-green-700 text-white p-2 rounded-lg hover:bg-green-900 transition text-lg font-semibold">
-            + Add Student
+    <!-- Buttons -->
+    <div class="flex space-x-3">
+        <!-- <button id="openModal" class="bg-green-700 text-white p-2 rounded-lg hover:bg-green-900 transition text-lg font-semibold">
+            Add
+        </button> -->
+
+        <button id="updateModal" class="bg-yellow-500 text-white p-2 rounded-lg hover:bg-yellow-900 transition text-lg font-semibold">
+            Update
         </button>
     </div>
+</div>
+
 
     <!-- Include Student Modal -->
     <?php include('../../modals/add_studentModal.php'); ?>
@@ -120,7 +129,7 @@ $result = mysqli_query($conn, $query);
                     <?php echo ($i == $page) 
                         ? 'bg-green-900 text-white font-bold border border-green-900 shadow-lg' 
                         : 'bg-gray-300 hover:bg-gray-400'; ?>">
-                <?php echo $i; ?>
+                    <?php echo $i; ?>
             </a>
         <?php endfor; ?>
 

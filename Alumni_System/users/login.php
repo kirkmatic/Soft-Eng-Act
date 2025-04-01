@@ -26,7 +26,7 @@
 
                 <button type="submit" name="login_btn" class="w-full bg-gradient-to-r from-green-500 to-green-900 text-xl text-white p-4 rounded-xl hover:bg-grey-200 transition font-semibold mb-2">Login</button>
             </form>
-            <!-- <p>Don't have an Account? <a class="font-semibold text-green-900" href="signup.php">Sign up </a></p> -->
+            <p>Don't have an Account? <a class="font-semibold text-green-900" href="signup.php">Sign up </a></p>
         </div>
 
         <!-- Toggle Panel -->

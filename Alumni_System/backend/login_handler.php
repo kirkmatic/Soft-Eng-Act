@@ -34,7 +34,7 @@ if (isset($_POST['login_btn'])) {
             // Redirect based on user role
             if ($access === 'Registrar') {
                 echo "<script>
-                        window.location.href='../users/REGISTRAR/registrar.php';
+                        window.location.href='../users/REGISTRAR/registrar_dashboard.php';
                       </script>";
             } else if ($access === 'CITCS') {
                 switch ($ucode) {

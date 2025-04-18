@@ -1,23 +1,23 @@
 <?php
-include ("../../includes/header.php");
-include ("../../config/app.php");
+    include ("../../../includes/header.php");
+    include ("../../../config/app.php");
 ?>
 
 <body>
-    <?php include('registrar_navigation.php'); ?>
+    <?php include('bscs_navigation.php'); ?>
     <div class="container mx-auto p-6">
 
         <h1 class="text-2xl font-bold mb-4">Dashboard</h1>
         
         <?php
         // Fetch total students count
-        $student_count_query = "SELECT COUNT(*) as total_students FROM students_table";
+        $student_count_query = "SELECT COUNT(*) as total_students FROM students_background_table WHERE program = 'BSCS'";
         $result = mysqli_query($conn, $student_count_query);
         $row = mysqli_fetch_assoc($result);
         $total_students = $row['total_students'];
         
         // Fetch work status counts
-        $work_status_query = "SELECT work_status, COUNT(*) as count FROM students_background_table GROUP BY work_status";
+        $work_status_query = "SELECT work_status, COUNT(*) as count FROM students_background_table WHERE program = 'BSCS' GROUP BY work_status";
         $result = mysqli_query($conn, $work_status_query);
         $work_data = ["Employed" => 0, "Unemployed" => 0];
         
@@ -28,11 +28,15 @@ include ("../../config/app.php");
             }
         }
         
-        // Fetch gender counts
-        $gender_query = "SELECT gender, COUNT(*) as count FROM students_table GROUP BY gender";
+        // Count genders for CITCS students
+        $gender_query = "SELECT s.gender, COUNT(*) as count 
+                        FROM students_table s
+                        JOIN students_background_table b ON s.alumni_id = b.alumni_id
+                        WHERE b.program = 'BSCS'
+                        GROUP BY s.gender";
         $result = mysqli_query($conn, $gender_query);
         $gender_counts = ['Male' => 0, 'Female' => 0];
-        
+
         while ($row = mysqli_fetch_assoc($result)) {
             $gender = ucfirst(strtolower($row['gender'])); // Normalize gender format
             if (array_key_exists($gender, $gender_counts)) {
@@ -43,14 +47,14 @@ include ("../../config/app.php");
         $work_data_json = json_encode(array_values($work_data));
         
         // Fetch program counts
-        $program_query = "SELECT department, COUNT(*) as count FROM students_background_table GROUP BY department";
+        $program_query = "SELECT batch_name, COUNT(*) as count FROM students_background_table WHERE program = 'BSCS' GROUP BY batch_name";
         $result = mysqli_query($conn, $program_query);
         
         $program_labels = [];
         $program_counts = [];
         
         while ($row = mysqli_fetch_assoc($result)) {
-            $program_labels[] = $row['department'];
+            $program_labels[] = $row['batch_name'];
             $program_counts[] = $row['count'];
         }
         
@@ -78,7 +82,7 @@ include ("../../config/app.php");
                 <div class="bg-white p-6 shadow rounded-lg flex items-center">
                     <i class="fas fa-users text-green-500 text-5xl mr-4"></i>
                     <div class="flex flex-col">
-                        <h2 class="text-lg font-semibold">Total Students</h2>
+                        <h2 class="text-lg font-semibold">Total BSCS Students</h2>
                         <h4 class="text-xl font-semibold"><?php echo $total_students; ?></h4>
                     </div>
                 </div>
@@ -112,7 +116,7 @@ include ("../../config/app.php");
 
             <!-- Third Column: Students per Program Chart -->
             <div class="bg-white p-4 shadow rounded-lg">
-                <h2 class="text-xl font-semibold mb-4">Students per Department</h2>
+                <h2 class="text-xl font-semibold mb-4">Students per Batch</h2>
                 <div class="flex justify-center" style="height: 300px;">
                     <canvas id="programChart" style="max-width: 100%; height: 100%;"></canvas>
                 </div>

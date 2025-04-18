@@ -48,8 +48,8 @@ if (isset($_POST['add_student'])) {
         $conn->commit();
 
         echo "<script>
-        window.location.href='../users/REGISTRAR/registrar.php';
-        </script>";
+        window.location.assign('../users/CITCS/BSCS/bscs_records.php');
+        </script>";        
         exit();
     } catch (Exception $e) {
         $conn->rollback(); // Rollback changes if error occurs

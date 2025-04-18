@@ -94,15 +94,15 @@
                         <option value="Unemployed">Unemployed</option>
                     </select>
                 </div>
-            </form>
-        </div>
 
-        <!-- Modal Footer (Fixed Buttons) -->
-        <div class="p-4 flex justify-end space-x-3 border-t">
-        <button class="closeModal bg-red-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-red-800 transition">
-            Cancel
-        </button>
-            <button type="submit" form="studentForm" name="add_student" class="bg-green-700 text-white px-4 py-2 rounded text-sm font-medium hover:bg-green-900 transition">Save</button>
+                <!-- Modal Footer (Fixed Buttons) -->
+                <div class="p-4 flex justify-end space-x-3 border-t">
+                <button class="closeModal bg-red-600 text-white px-4 py-2 rounded text-sm font-medium hover:bg-red-800 transition">
+                    Cancel
+                </button>
+                    <button type="submit" form="studentForm" name="add_student" class="bg-green-700 text-white px-4 py-2 rounded text-sm font-medium hover:bg-green-900 transition">Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

@@ -40,12 +40,12 @@ if (isset($_POST['login_btn'])) {
                 switch ($ucode) {
                     case '001': 
                         echo "<script>
-                                window.location.href='../users/CITCS/Dean/dean_page.php';
+                                window.location.href='../users/CITCS/Dean/dean_dashboard.php';
                               </script>";
                         break;
                     case '002': 
                         echo "<script>
-                                window.location.href='../users/CITCS/ACT/act_page.php';
+                                window.location.href='../users/CITCS/ACT/act_dashboard.php';
                               </script>";
                         break;
                     case '003': 
@@ -55,7 +55,7 @@ if (isset($_POST['login_btn'])) {
                         break;
                     case '004': 
                         echo "<script>
-                                window.location.href='../users/CITCS/BSCS/bscs_page.php';
+                                window.location.href='../users/CITCS/BSCS/bscs_dashboard.php';
                               </script>";
                         break;
                     default:
